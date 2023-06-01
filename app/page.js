@@ -1,10 +1,13 @@
 "use client"
 
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import {currencyFormatter} from './lib/utils'
 import ExpenseCategoryItem from "./components/Expenses";
+import Modal from "./components/Modal";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -42,11 +45,13 @@ const DUMMY_DATA = [
 ]
 
 export default function Home() {
+
+  const [modalIsOpened, setModalIsOpened] = useState(false)
+
   return (
   <>
-    <div>
+    <Modal show={modalIsOpened} onClose={setModalIsOpened}><h3>Heeeeeelo</h3></Modal>
 
-    </div>
     <main className="container max-w-2xl px-6 mx-auto">
       <Navbar />
       <section className="py-3">
@@ -55,7 +60,9 @@ export default function Home() {
       </section>
 
       <section className="flex items-center gap-2 py-3">
-        <button className="btn btn-primary">+ Expenses</button>
+        <button onClick={() => { 
+        setModalIsOpened(true)
+        }} className="btn btn-primary">+ Expenses</button>
         <button className="btn btn-primary-outline">+ Income</button>
       </section>
 
