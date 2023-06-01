@@ -1,1 +1,1 @@
-finance tracking app
+finance tracking app, next.js
