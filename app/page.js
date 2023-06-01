@@ -43,6 +43,10 @@ const DUMMY_DATA = [
 
 export default function Home() {
   return (
+  <>
+    <div>
+
+    </div>
     <main className="container max-w-2xl px-6 mx-auto">
       <Navbar />
       <section className="py-3">
@@ -90,5 +94,6 @@ export default function Home() {
         </div>
       </section>
     </main>
+  </>
   )
 }
