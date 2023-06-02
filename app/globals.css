@@ -28,4 +28,8 @@
   .btn-danger{
     @apply border text-white bg-red-600 border-red-600
   }
+
+  .input-group {
+    @apply flex flex-col gap-4
+  }
 }

@@ -46,11 +46,39 @@ const DUMMY_DATA = [
 
 export default function Home() {
 
-  const [modalIsOpened, setModalIsOpened] = useState(false)
+  const [showAddIncomeModal, setShowAddIncomeModal] = useState(false)
 
   return (
   <>
-    <Modal show={modalIsOpened} onClose={setModalIsOpened}><h3>Heeeeeelo</h3></Modal>
+    <Modal show={showAddIncomeModal} onClose={setShowAddIncomeModal}>
+      <form className="input-group">
+        <div className="input-group">
+          <label htmlFor="amount">Income Amount</label>
+          <input className="px-4 py-2 bg-slate-600 rounded-xl" 
+          type="number" 
+          name="amount"
+          min={0.01} 
+          step={0.01} 
+          placeholder="Enter Income Amount"
+          required
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="description">Description Amount</label>
+          <input className="px-4 py-2 bg-slate-600 rounded-xl" 
+          type="text" 
+          name="description"
+          placeholder="Enter Income Description"
+          required
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary self-start">
+          Add entry
+        </button>
+      </form>
+    </Modal>
 
     <main className="container max-w-2xl px-6 mx-auto">
       <Navbar />
@@ -61,9 +89,14 @@ export default function Home() {
 
       <section className="flex items-center gap-2 py-3">
         <button onClick={() => { 
-        setModalIsOpened(true)
-        }} className="btn btn-primary">+ Expenses</button>
-        <button className="btn btn-primary-outline">+ Income</button>
+        setShowAddIncomeModal(true)
+        }} className="btn btn-primary">
+          + Expenses
+        </button>
+        <button onClick={() => { setShowAddIncomeModal(true) 
+        }} className="btn btn-primary-outline">
+          + Income
+        </button>
       </section>
 
       {/*  EXPENSES */}
