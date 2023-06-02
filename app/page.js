@@ -54,7 +54,7 @@ export default function Home() {
       <form className="input-group">
         <div className="input-group">
           <label htmlFor="amount">Income Amount</label>
-          <input className="px-4 py-2 bg-slate-600 rounded-xl" 
+          <input
           type="number" 
           name="amount"
           min={0.01} 
@@ -66,7 +66,7 @@ export default function Home() {
 
         <div className="input-group">
           <label htmlFor="description">Description Amount</label>
-          <input className="px-4 py-2 bg-slate-600 rounded-xl" 
+          <input
           type="text" 
           name="description"
           placeholder="Enter Income Description"
