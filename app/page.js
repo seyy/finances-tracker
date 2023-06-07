@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Navbar from "./components/Navbar";
 import {currencyFormatter} from './lib/utils'
 import ExpenseCategoryItem from "./components/Expenses";
@@ -47,16 +47,33 @@ const DUMMY_DATA = [
 export default function Home() {
 
   const [showAddIncomeModal, setShowAddIncomeModal] = useState(false)
+  const amountRef = useRef()
+  const descriptionRef = useRef()
+
+  // Handle Functions
+
+  const addIncomeHandler =(e) => {
+    e.preventDefault()
+
+    const newIncome = {
+      amount: amountRef.current.value,
+      description: descriptionRef.current.value,
+      createdAt: new Date(),
+    }
+
+    console.log(newIncome)
+  }
 
   return (
   <>
     <Modal show={showAddIncomeModal} onClose={setShowAddIncomeModal}>
-      <form className="input-group">
+      <form onSubmit={addIncomeHandler} className="input-group">
         <div className="input-group">
           <label htmlFor="amount">Income Amount</label>
           <input
           type="number" 
           name="amount"
+          ref={amountRef}
           min={0.01} 
           step={0.01} 
           placeholder="Enter Income Amount"
@@ -69,6 +86,7 @@ export default function Home() {
           <input
           type="text" 
           name="description"
+          ref={descriptionRef}
           placeholder="Enter Income Description"
           required
           />
@@ -106,9 +124,10 @@ export default function Home() {
           {DUMMY_DATA.map(expense => {
             return (
            <ExpenseCategoryItem 
-           color={expense.color} 
-           title={expense.title}
-           amount={expense.total}
+           key={expense.id}
+            color={expense.color} 
+            title={expense.title}
+            amount={expense.total}
            />
           )
           })}
