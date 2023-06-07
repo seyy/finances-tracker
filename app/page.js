@@ -93,7 +93,7 @@ export default function Home() {
         </div>
 
         <div className="input-group">
-          <label htmlFor="description">Description Amount</label>
+          <label htmlFor="description">Description</label>
           <input
           type="text" 
           name="description"
