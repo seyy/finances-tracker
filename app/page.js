@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import {currencyFormatter} from './lib/utils'
 import ExpenseCategoryItem from "./components/Expenses";
@@ -49,6 +49,7 @@ const DUMMY_DATA = [
 ]
 
 export default function Home() {
+  const [income, setIncome] = useState([])
 
   const [showAddIncomeModal, setShowAddIncomeModal] = useState(false)
   const amountRef = useRef()
@@ -74,6 +75,24 @@ export default function Home() {
       console.log(error.message)
     }
   }
+
+  useEffect(() => {
+    const getIncomeData = async () => {
+      const collectionRef = collection (db, 'income')
+      const docsSnap = await getDocs(collectionRef)
+
+      const data = docsSnap.docs.map(doc => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+          createdAt: new Date(doc.data().createdAt.toMillis())
+        }
+      })
+      setIncome(data)
+    }
+
+    getIncomeData()
+  }, [])
 
   return (
   <>
@@ -107,6 +126,11 @@ export default function Home() {
           Add entry
         </button>
       </form>
+
+      <div className="flex flex-col gap-4 mt-6">
+        <h3 className="text-2xl font-bold">Income History:</h3>
+
+      </div>
     </Modal>
 
     <main className="container max-w-2xl px-6 mx-auto">
