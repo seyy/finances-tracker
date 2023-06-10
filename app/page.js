@@ -85,6 +85,9 @@ export default function Home() {
         ]
       })
 
+      descriptionRef.current.value = ""
+      amountRef.current.value = ""
+
     } catch (error) {
       console.log(error.message)
     }
@@ -94,6 +97,11 @@ export default function Home() {
     const docRef = doc(db, 'income', incomeId)
     try {
       await deleteDoc(docRef)
+      setIncome(prevState => {
+        return prevState.filter(i => i.id!== incomeId)
+      })
+      //Updating the state
+      
 
     } catch (error) {
       console.log(error.message)
